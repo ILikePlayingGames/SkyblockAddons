@@ -45,6 +45,10 @@ jar {
 
 }
 
+artifacts {
+    archives jar
+}
+
 configurations {
     provided
     compile.extendsFrom(provided)
