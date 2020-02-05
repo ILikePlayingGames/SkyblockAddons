@@ -153,13 +153,13 @@ public class PlayerListener {
             // credits to tomotomo, thanks lol
             if (main.getConfigValues().isEnabled(Feature.SUMMONING_EYE_ALERT) && formattedText.equals("§r§6§lRARE DROP! §r§5Summoning Eye§r")) {
                 main.getUtils().playLoudSound("random.orb", 0.5);
-                main.getRenderListener().setTitleFeature(Feature.SUMMONING_EYE_ALERT);
+                main.getOverlayRenderer().setTitleFeature(Feature.SUMMONING_EYE_ALERT);
                 main.getScheduler().schedule(Scheduler.CommandType.RESET_TITLE_FEATURE, main.getConfigValues().getWarningSeconds());
             } else if (formattedText.equals("§r§aA special §r§5Zealot §r§ahas spawned nearby!§r")) {
                 if (main.getConfigValues().isEnabled(Feature.SPECIAL_ZEALOT_ALERT)) {
                     main.getUtils().playLoudSound("random.orb", 0.5);
-                    main.getRenderListener().setTitleFeature(Feature.SUMMONING_EYE_ALERT);
-                    main.getRenderListener().setTitleFeature(Feature.SPECIAL_ZEALOT_ALERT);
+                    main.getOverlayRenderer().setTitleFeature(Feature.SUMMONING_EYE_ALERT);
+                    main.getOverlayRenderer().setTitleFeature(Feature.SPECIAL_ZEALOT_ALERT);
                     main.getScheduler().schedule(Scheduler.CommandType.RESET_TITLE_FEATURE, main.getConfigValues().getWarningSeconds());
                 }
                 if (main.getConfigValues().isEnabled(Feature.ZEALOT_COUNTER)) {
@@ -176,13 +176,13 @@ public class PlayerListener {
             if (main.getConfigValues().isEnabled(Feature.NO_ARROWS_LEFT_ALERT)) {
                 if (formattedText.equals("§r§cYou don't have any more Arrows left in your Quiver!§r")) {
                     main.getUtils().playLoudSound("random.orb", 0.5);
-                    main.getRenderListener().setSubtitleFeature(Feature.NO_ARROWS_LEFT_ALERT);
+                    main.getOverlayRenderer().setSubtitleFeature(Feature.NO_ARROWS_LEFT_ALERT);
                     main.getScheduler().schedule(Scheduler.CommandType.RESET_SUBTITLE_FEATURE, main.getConfigValues().getWarningSeconds());
                 } else if (formattedText.startsWith("§r§cYou only have") && formattedText.endsWith("Arrows left in your Quiver!§r")) {
                     int arrowsLeft = Integer.parseInt(main.getUtils().getNumbersOnly(formattedText).trim());
                     main.getUtils().playLoudSound("random.orb", 0.5);
-                    main.getRenderListener().setSubtitleFeature(Feature.NO_ARROWS_LEFT_ALERT);
-                    main.getRenderListener().setArrowsLeft(arrowsLeft);// THIS IS IMPORTANT
+                    main.getOverlayRenderer().setSubtitleFeature(Feature.NO_ARROWS_LEFT_ALERT);
+                    main.getOverlayRenderer().setArrowsLeft(arrowsLeft);// THIS IS IMPORTANT
                     main.getScheduler().schedule(Scheduler.CommandType.RESET_SUBTITLE_FEATURE, main.getConfigValues().getWarningSeconds());
                 }
             }
@@ -348,7 +348,7 @@ public class PlayerListener {
                     if (now - lastMinionSound > cooldown) { //this just spams message...
                         lastMinionSound = now;
                         main.getUtils().playLoudSound("random.pop", 1);
-                        main.getRenderListener().setSubtitleFeature(Feature.MINION_FULL_WARNING);
+                        main.getOverlayRenderer().setSubtitleFeature(Feature.MINION_FULL_WARNING);
                         main.getScheduler().schedule(Scheduler.CommandType.RESET_SUBTITLE_FEATURE, main.getConfigValues().getWarningSeconds());
                     }
                 } else if (main.getConfigValues().isEnabled(Feature.MINION_STOP_WARNING) &&
@@ -361,8 +361,8 @@ public class PlayerListener {
                         if (mobName.lastIndexOf("s") == mobName.length() - 1) {
                             mobName = mobName.substring(0, mobName.length() - 1);
                         }
-                        main.getRenderListener().setCannotReachMobName(mobName);
-                        main.getRenderListener().setSubtitleFeature(Feature.MINION_STOP_WARNING);
+                        main.getOverlayRenderer().setCannotReachMobName(mobName);
+                        main.getOverlayRenderer().setSubtitleFeature(Feature.MINION_STOP_WARNING);
                         main.getScheduler().schedule(Scheduler.CommandType.RESET_SUBTITLE_FEATURE, main.getConfigValues().getWarningSeconds());
                     }
                 }
@@ -412,7 +412,7 @@ public class PlayerListener {
                                     foundBoss = true;
                                     if ((lastBoss == -1 || System.currentTimeMillis() - lastBoss > 1800000)) {
                                         lastBoss = System.currentTimeMillis();
-                                        main.getRenderListener().setTitleFeature(Feature.MAGMA_WARNING); // Enable warning and disable again in four seconds.
+                                        main.getOverlayRenderer().setTitleFeature(Feature.MAGMA_WARNING); // Enable warning and disable again in four seconds.
                                         magmaTick = 16; // so the sound plays instantly
                                         main.getScheduler().schedule(Scheduler.CommandType.RESET_TITLE_FEATURE, main.getConfigValues().getWarningSeconds());
 //                                logServer(mc);
@@ -425,8 +425,8 @@ public class PlayerListener {
                                 }
                             }
                         }
-                        if (!foundBoss && main.getRenderListener().getTitleFeature() == Feature.MAGMA_WARNING) {
-                            main.getRenderListener().setTitleFeature(null);
+                        if (!foundBoss && main.getOverlayRenderer().getTitleFeature() == Feature.MAGMA_WARNING) {
+                            main.getOverlayRenderer().setTitleFeature(null);
                         }
                         if (!foundBoss && magmaAccuracy == EnumUtils.MagmaTimerAccuracy.SPAWNED) {
                             magmaAccuracy = EnumUtils.MagmaTimerAccuracy.ABOUT;
@@ -437,7 +437,7 @@ public class PlayerListener {
                             }
                         }
                     }
-                    if (main.getRenderListener().getTitleFeature() == Feature.MAGMA_WARNING && magmaTick % 4 == 0) { // Play sound every 4 ticks or 1/5 second.
+                    if (main.getOverlayRenderer().getTitleFeature() == Feature.MAGMA_WARNING && magmaTick % 4 == 0) { // Play sound every 4 ticks or 1/5 second.
                         main.getUtils().playLoudSound("random.orb", 0.5);
                     }
                 }
@@ -598,7 +598,7 @@ public class PlayerListener {
         }
     }
 
-    @SubscribeEvent
+    @SubscribeEvent()
     public void onGuiOpen(GuiOpenEvent e) {
         if (e.gui == null && GuiChest.class.equals(lastOpenedInventory)) {
             lastClosedInv = System.currentTimeMillis();
@@ -613,11 +613,11 @@ public class PlayerListener {
     public void onKeyInput(InputEvent.KeyInputEvent e) {
         if (main.getOpenSettingsKey().isPressed()) {
             main.getUtils().setFadingIn(true);
-            main.getRenderListener().setGuiToOpen(EnumUtils.GUIType.MAIN, 1, EnumUtils.GuiTab.MAIN);
+            main.getGuiRenderer().setGuiToOpen(EnumUtils.GUIType.MAIN, 1, EnumUtils.GuiTab.MAIN);
         }
         else if (main.getOpenEditLocationsKey().isPressed()) {
             main.getUtils().setFadingIn(false);
-            main.getRenderListener().setGuiToOpen(EnumUtils.GUIType.EDIT_LOCATIONS, 0, null);
+            main.getGuiRenderer().setGuiToOpen(EnumUtils.GUIType.EDIT_LOCATIONS, 0, null);
         }
         else if (main.getDevKey().isPressed()) {
 
@@ -718,7 +718,7 @@ public class PlayerListener {
         return actionBarParser.getMaxTickers();
     }
 
-    Integer getHealthUpdate() {
+    public Integer getHealthUpdate() {
         return actionBarParser.getHealthUpdate();
     }
 }

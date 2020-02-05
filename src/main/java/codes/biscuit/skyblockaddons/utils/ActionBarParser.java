@@ -218,9 +218,9 @@ public class ActionBarParser {
         // Another Example: §5+§d30 §5Runecrafting (969/1000)
         Matcher matcher = COLLECTIONS_CHAT_PATTERN.matcher(skillSection);
         if (matcher.matches() && main.getConfigValues().isEnabled(Feature.SKILL_DISPLAY)) {
-            main.getRenderListener().setSkillText("+" + matcher.group(1) + " " + matcher.group(3));
-            main.getRenderListener().setSkill(EnumUtils.SkillType.getFromString(matcher.group(2)));
-            main.getRenderListener().setSkillFadeOutTime(System.currentTimeMillis() + 4000);
+            main.getOverlayRenderer().setSkillText("+" + matcher.group(1) + " " + matcher.group(3));
+            main.getOverlayRenderer().setSkill(EnumUtils.SkillType.getFromString(matcher.group(2)));
+            main.getOverlayRenderer().setSkillFadeOutTime(System.currentTimeMillis() + 4000);
             return null;
         }
         return skillSection;

@@ -428,7 +428,7 @@ public class SkyblockAddonsGui extends GuiScreen {
     public void onGuiClosed() {
         if (!cancelClose) {
             if (tab == EnumUtils.GuiTab.GENERAL_SETTINGS) {
-                main.getRenderListener().setGuiToOpen(EnumUtils.GUIType.MAIN, 1, EnumUtils.GuiTab.MAIN, featureSearchBar.getText());
+                main.getGuiRenderer().setGuiToOpen(EnumUtils.GUIType.MAIN, 1, EnumUtils.GuiTab.MAIN, featureSearchBar.getText());
             }
             main.getConfigValues().saveConfig();
             Keyboard.enableRepeatEvents(false);

@@ -289,6 +289,6 @@ public class SettingsGui extends GuiScreen {
 
     private void returnToGui() {
         closingGui = true;
-        main.getRenderListener().setGuiToOpen(EnumUtils.GUIType.MAIN, lastPage, lastTab, lastText);
+        main.getGuiRenderer().setGuiToOpen(EnumUtils.GUIType.MAIN, lastPage, lastTab, lastText);
     }
 }

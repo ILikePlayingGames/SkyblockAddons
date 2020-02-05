@@ -1,9 +1,11 @@
 package codes.biscuit.skyblockaddons;
 
 import codes.biscuit.skyblockaddons.commands.SkyblockAddonsCommand;
+import codes.biscuit.skyblockaddons.renderer.GuiRenderer;
 import codes.biscuit.skyblockaddons.listeners.GuiScreenListener;
 import codes.biscuit.skyblockaddons.listeners.PlayerListener;
 import codes.biscuit.skyblockaddons.listeners.RenderListener;
+import codes.biscuit.skyblockaddons.renderer.OverlayRenderer;
 import codes.biscuit.skyblockaddons.tweaker.SkyblockAddonsTransformer;
 import codes.biscuit.skyblockaddons.utils.*;
 import lombok.AccessLevel;
@@ -42,6 +44,8 @@ public class SkyblockAddons {
     private PlayerListener playerListener = new PlayerListener(this);
     private GuiScreenListener guiScreenListener = new GuiScreenListener(this);
     private RenderListener renderListener = new RenderListener(this);
+    @Getter private GuiRenderer guiRenderer = new GuiRenderer(this);
+    @Getter private OverlayRenderer overlayRenderer = new OverlayRenderer(this);
     private Utils utils = new Utils(this);
     private InventoryUtils inventoryUtils = new InventoryUtils(this);
 

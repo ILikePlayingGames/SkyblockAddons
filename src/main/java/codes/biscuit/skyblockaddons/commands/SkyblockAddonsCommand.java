@@ -64,7 +64,7 @@ public class SkyblockAddonsCommand extends CommandBase {
                     break;
                 case "edit":
                     main.getUtils().setFadingIn(false);
-                    main.getRenderListener().setGuiToOpen(EnumUtils.GUIType.EDIT_LOCATIONS, 0, null);
+                    main.getGuiRenderer().setGuiToOpen(EnumUtils.GUIType.EDIT_LOCATIONS, 0, null);
                     break;
                 case "dev":
                     main.setDevMode(!main.isDevMode());
@@ -76,8 +76,8 @@ public class SkyblockAddonsCommand extends CommandBase {
                     }
                     break;
                 case "update": // Not actually a command.
-                    if (main.getRenderListener().getDownloadInfo().isPatch())
-                        main.getUtils().downloadPatch(main.getRenderListener().getDownloadInfo().getNewestVersion());
+                    if (main.getOverlayRenderer().getDownloadInfo().isPatch())
+                        main.getUtils().downloadPatch(main.getOverlayRenderer().getDownloadInfo().getNewestVersion());
                     break;
                 case "folder":
                     try {
@@ -91,7 +91,7 @@ public class SkyblockAddonsCommand extends CommandBase {
         else {
             // If there's no arguments given, open the main GUI
             main.getUtils().setFadingIn(true);
-            main.getRenderListener().setGuiToOpen(EnumUtils.GUIType.MAIN, 1, EnumUtils.GuiTab.MAIN);
+            main.getGuiRenderer().setGuiToOpen(EnumUtils.GUIType.MAIN, 1, EnumUtils.GuiTab.MAIN);
         }
     }
 }

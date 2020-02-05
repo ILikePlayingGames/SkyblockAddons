@@ -224,7 +224,7 @@ public class LocationEditGui extends GuiScreen {
     public void onGuiClosed() {
         main.getConfigValues().saveConfig();
         if (lastTab != null) {
-            main.getRenderListener().setGuiToOpen(EnumUtils.GUIType.MAIN, lastPage, lastTab, lastText);
+            main.getGuiRenderer().setGuiToOpen(EnumUtils.GUIType.MAIN, lastPage, lastTab, lastText);
         }
     }
 }

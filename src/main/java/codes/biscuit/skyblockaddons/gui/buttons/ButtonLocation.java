@@ -35,7 +35,7 @@ public class ButtonLocation extends ButtonFeature {
         if (feature == Feature.DEFENCE_ICON) { // this one is just a little different
             scale *= 1.5;
             GlStateManager.scale(scale,scale,1);
-            main.getRenderListener().drawIcon(scale, mc, this);
+            main.getOverlayRenderer().drawIcon(scale, mc, this);
             scale /= 1.5;
             GlStateManager.scale(scale,scale,1);
         } else {

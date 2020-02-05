@@ -205,6 +205,6 @@ public class ColorSelectionGui extends GuiScreen {
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
 
-        SkyblockAddons.getInstance().getRenderListener().setGuiToOpen(EnumUtils.GUIType.MAIN, lastPage, lastTab);
+        SkyblockAddons.getInstance().getGuiRenderer().setGuiToOpen(EnumUtils.GUIType.MAIN, lastPage, lastTab);
     }
 }

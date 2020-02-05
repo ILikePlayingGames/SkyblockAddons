@@ -178,7 +178,7 @@ public class InventoryUtils {
                 inventoryIsFull = true;
                 if (mc.currentScreen == null && main.getPlayerListener().didntRecentlyJoinWorld()) {
                     main.getUtils().playLoudSound("random.orb", 0.5);
-                    main.getRenderListener().setTitleFeature(Feature.FULL_INVENTORY_WARNING);
+                    main.getOverlayRenderer().setTitleFeature(Feature.FULL_INVENTORY_WARNING);
                     main.getScheduler().schedule(Scheduler.CommandType.RESET_TITLE_FEATURE, main.getConfigValues().getWarningSeconds());
                 }
             }

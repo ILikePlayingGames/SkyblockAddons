@@ -2,6 +2,7 @@ package codes.biscuit.skyblockaddons.utils;
 
 import codes.biscuit.skyblockaddons.SkyblockAddons;
 import codes.biscuit.skyblockaddons.gui.buttons.ButtonLocation;
+import codes.biscuit.skyblockaddons.renderer.OverlayRenderer;
 import codes.biscuit.skyblockaddons.tweaker.SkyblockAddonsTransformer;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
@@ -30,7 +31,7 @@ public class TabEffectManager {
 
     /**
      * The following two fields are accessed by
-     * {@link codes.biscuit.skyblockaddons.listeners.RenderListener#drawPotionEffectTimers(float, ButtonLocation)} to retrieve lists for drawing.
+     * {@link OverlayRenderer#drawPotionEffectTimers(float, ButtonLocation)} to retrieve lists for drawing.
      *
      * Both return a list of current Potion or Powerup timers. They can be empty, but are never null.
      */
@@ -39,7 +40,7 @@ public class TabEffectManager {
 
     /**
      * The following two fields are accessed by
-     * {@link codes.biscuit.skyblockaddons.listeners.RenderListener#drawPotionEffectTimers(float, ButtonLocation)}
+     * {@link OverlayRenderer#drawPotionEffectTimers(float, ButtonLocation)}
      * to retrieve dummy lists for drawing when editing GUI locations while no Effects are active.
      *
      * Both return a list of dummy Potion or Powerup timers.

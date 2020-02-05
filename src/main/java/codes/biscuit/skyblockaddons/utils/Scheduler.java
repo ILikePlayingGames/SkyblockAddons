@@ -126,12 +126,12 @@ public class Scheduler {
                 CoordsPair coordsPair = new CoordsPair(x,z);
                 playerListener.getRecentlyLoadedChunks().remove(coordsPair);
             } else if (this == RESET_TITLE_FEATURE) {
-                main.getRenderListener().setTitleFeature(null);
+                main.getOverlayRenderer().setTitleFeature(null);
             } else if (this == RESET_SUBTITLE_FEATURE) {
-                main.getRenderListener().setSubtitleFeature(null);
+                main.getOverlayRenderer().setSubtitleFeature(null);
             } else if (this == RESET_UPDATE_MESSAGE) {
-                if (main.getRenderListener().getDownloadInfo().getMessageType() == commandData[0])
-                main.getRenderListener().getDownloadInfo().setMessageType(null);
+                if (main.getOverlayRenderer().getDownloadInfo().getMessageType() == commandData[0])
+                main.getOverlayRenderer().getDownloadInfo().setMessageType(null);
             } else if (this == SET_LAST_SECOND_HEALTH) {
                 main.getPlayerListener().setLastSecondHealth((int)commandData[0]);
             }

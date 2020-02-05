@@ -173,23 +173,23 @@ public enum Feature {
         if (guiFeatureData != null) {
             SkyblockAddons main = SkyblockAddons.getInstance();
             if (guiFeatureData.getDrawType() == EnumUtils.DrawType.BAR) {
-                main.getRenderListener().drawBar(this, scale, mc, buttonLocation);
+                main.getOverlayRenderer().drawBar(this, scale, mc, buttonLocation);
             } else if (guiFeatureData.getDrawType() == EnumUtils.DrawType.SKELETON_BAR) {
-                main.getRenderListener().drawSkeletonBar(mc, scale, buttonLocation);
+                main.getOverlayRenderer().drawSkeletonBar(mc, scale, buttonLocation);
             } else if (guiFeatureData.getDrawType() == EnumUtils.DrawType.TEXT) {
-                main.getRenderListener().drawText(this, scale, mc, buttonLocation);
+                main.getOverlayRenderer().drawText(this, scale, mc, buttonLocation);
             } else if (guiFeatureData.getDrawType() == EnumUtils.DrawType.PICKUP_LOG) {
-                main.getRenderListener().drawItemPickupLog(scale, buttonLocation);
+                main.getOverlayRenderer().drawItemPickupLog(scale, buttonLocation);
             } else if (guiFeatureData.getDrawType() == EnumUtils.DrawType.DEFENCE_ICON) {
-                main.getRenderListener().drawIcon(scale, mc, buttonLocation);
+                main.getOverlayRenderer().drawIcon(scale, mc, buttonLocation);
             } else if (guiFeatureData.getDrawType() == EnumUtils.DrawType.REVENANT_PROGRESS) {
-                main.getRenderListener().drawRevenantIndicator(scale, mc, buttonLocation);
+                main.getOverlayRenderer().drawRevenantIndicator(scale, mc, buttonLocation);
             } else if(guiFeatureData.getDrawType() == EnumUtils.DrawType.POWER_ORB_DISPLAY) {
-                main.getRenderListener().drawPowerOrbStatus(mc, scale, buttonLocation);
+                main.getOverlayRenderer().drawPowerOrbStatus(mc, scale, buttonLocation);
             } else if(guiFeatureData.getDrawType() == EnumUtils.DrawType.TICKER) {
-                main.getRenderListener().drawScorpionFoilTicker(mc, scale, buttonLocation);
+                main.getOverlayRenderer().drawScorpionFoilTicker(mc, scale, buttonLocation);
             } else if (guiFeatureData.getDrawType() == EnumUtils.DrawType.TAB_EFFECT_TIMERS){
-                main.getRenderListener().drawPotionEffectTimers(scale, buttonLocation);
+                main.getOverlayRenderer().drawPotionEffectTimers(scale, buttonLocation);
             }
         }
     }

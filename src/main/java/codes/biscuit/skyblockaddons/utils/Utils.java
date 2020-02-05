@@ -274,7 +274,7 @@ public class Utils {
                         break;
                     }
                 }
-                main.getRenderListener().getDownloadInfo().setNewestVersion(newestVersion);
+                main.getOverlayRenderer().getDownloadInfo().setNewestVersion(newestVersion);
                 reader.close();
                 List<Integer> newestVersionNumbers = new ArrayList<>();
                 List<Integer> thisVersionNumbers = new ArrayList<>();
@@ -332,19 +332,19 @@ public class Utils {
                         } catch (Exception ex) {
                             ex.printStackTrace();
                         } finally {
-                            main.getRenderListener().getDownloadInfo().setDownloadLink(link);
+                            main.getOverlayRenderer().getDownloadInfo().setDownloadLink(link);
                             if (i == 2 || i == 3 || outOfBeta) { // 0.0.x or 0.0.0-bx
-                                main.getRenderListener().getDownloadInfo().setPatch(true);
-                                main.getRenderListener().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.PATCH_AVAILABLE);
+                                main.getOverlayRenderer().getDownloadInfo().setPatch(true);
+                                main.getOverlayRenderer().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.PATCH_AVAILABLE);
                                 sendUpdateMessage(true,true);
                             } else {
-                                main.getRenderListener().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.MAJOR_AVAILABLE);
+                                main.getOverlayRenderer().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.MAJOR_AVAILABLE);
                                 sendUpdateMessage(true,false);
                             }
                         }
                         break;
                     } else if (thisVersionNumbers.get(i) > newestVersionNumbers.get(i)) {
-                        main.getRenderListener().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.DEVELOPMENT);
+                        main.getOverlayRenderer().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.DEVELOPMENT);
                         break;
                     }
                 }
@@ -355,9 +355,9 @@ public class Utils {
     }
 
     void sendUpdateMessage(boolean showDownload, boolean showAutoDownload) {
-        String newestVersion = main.getRenderListener().getDownloadInfo().getNewestVersion();
+        String newestVersion = main.getOverlayRenderer().getDownloadInfo().getNewestVersion();
         sendMessage(color("&7&m------------&7[&b&l SkyblockAddons &7]&7&m------------"), false);
-        if (main.getRenderListener().getDownloadInfo().getMessageType() == EnumUtils.UpdateMessageType.DOWNLOAD_FINISHED) {
+        if (main.getOverlayRenderer().getDownloadInfo().getMessageType() == EnumUtils.UpdateMessageType.DOWNLOAD_FINISHED) {
             ChatComponentText deleteOldFile = new ChatComponentText(ChatFormatting.RED+Message.MESSAGE_DELETE_OLD_FILE.getMessage()+"\n");
             sendMessage(deleteOldFile, false);
         } else {
@@ -368,7 +368,7 @@ public class Utils {
         ChatComponentText buttonsMessage = new ChatComponentText("");
         if (showDownload) {
             buttonsMessage = new ChatComponentText(ChatFormatting.AQUA.toString() + ChatFormatting.BOLD + '[' + Message.MESSAGE_DOWNLOAD_LINK.getMessage(newestVersion) + ']');
-            buttonsMessage.setChatStyle(buttonsMessage.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, main.getRenderListener().getDownloadInfo().getDownloadLink())));
+            buttonsMessage.setChatStyle(buttonsMessage.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, main.getOverlayRenderer().getDownloadInfo().getDownloadLink())));
             buttonsMessage.appendSibling(new ChatComponentText(" "));
         }
 
@@ -384,7 +384,7 @@ public class Utils {
         buttonsMessage.appendSibling(openModsFolder);
 
         sendMessage(buttonsMessage, false);
-        if (main.getRenderListener().getDownloadInfo().getMessageType() != EnumUtils.UpdateMessageType.DOWNLOAD_FINISHED) {
+        if (main.getOverlayRenderer().getDownloadInfo().getMessageType() != EnumUtils.UpdateMessageType.DOWNLOAD_FINISHED) {
             ChatComponentText discord = new ChatComponentText(ChatFormatting.AQUA + Message.MESSAGE_VIEW_PATCH_NOTES.getMessage() + " " +
                                                                       ChatFormatting.BLUE.toString() + ChatFormatting.BOLD + '[' + Message.MESSAGE_JOIN_DISCORD.getMessage() + ']');
             discord.setChatStyle(discord.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/PqTAEek")));
@@ -618,9 +618,9 @@ public class Utils {
                     File outputFile = new File(sbaFolder.toString()+File.separator+fileName);
                     URLConnection connection = url.openConnection();
                     long totalFileSize = connection.getContentLengthLong();
-                    main.getRenderListener().getDownloadInfo().setTotalBytes(totalFileSize);
-                    main.getRenderListener().getDownloadInfo().setOutputFileName(fileName);
-                    main.getRenderListener().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.DOWNLOADING);
+                    main.getOverlayRenderer().getDownloadInfo().setTotalBytes(totalFileSize);
+                    main.getOverlayRenderer().getDownloadInfo().setOutputFileName(fileName);
+                    main.getOverlayRenderer().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.DOWNLOADING);
                     connection.setConnectTimeout(5000);
                     connection.setReadTimeout(5000);
                     BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream());
@@ -629,11 +629,11 @@ public class Utils {
                     int bytesRead;
                     while ((bytesRead = inputStream.read(dataBuffer, 0, 1024)) != -1) {
                         fileOutputStream.write(dataBuffer, 0, bytesRead);
-                        main.getRenderListener().getDownloadInfo().setDownloadedBytes(main.getRenderListener().getDownloadInfo().getDownloadedBytes()+bytesRead);
+                        main.getOverlayRenderer().getDownloadInfo().setDownloadedBytes(main.getOverlayRenderer().getDownloadInfo().getDownloadedBytes()+bytesRead);
                     }
-                    main.getRenderListener().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.DOWNLOAD_FINISHED);
+                    main.getOverlayRenderer().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.DOWNLOAD_FINISHED);
                 } catch (IOException e) {
-                    main.getRenderListener().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.FAILED);
+                    main.getOverlayRenderer().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.FAILED);
                     e.printStackTrace();
                 }
             }).start();
@@ -686,7 +686,7 @@ public class Utils {
             }
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException | NoSuchFieldException | IOException e) {
             e.printStackTrace();
-            if (changeMessage) main.getRenderListener().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.FAILED);
+            if (changeMessage) main.getOverlayRenderer().getDownloadInfo().setMessageType(EnumUtils.UpdateMessageType.FAILED);
         }
         return null;
     }
